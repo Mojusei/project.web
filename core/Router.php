@@ -6,7 +6,7 @@
 		public function getTrack($routes, $uri)
 		{
 			foreach ($routes as $route) {
-				$pattern = $this->createPattern($route->path); // см. описание метода
+				$pattern = $this->createPattern($route->path); 
 				
 				/*
 					Проверяем адрес URI на соответствие регулярке
