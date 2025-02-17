@@ -13,9 +13,9 @@
         {
             $this->partsOfSpeech = ['adject', 'nouns', 'verbs'];
             $this->charsRus = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т',
-            'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я'];
+            'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Э', 'Ю', 'Я'];
             
-            $this->word = $this->selectRandomWord();
+            $this->word = '';
         }
 
         public function getRandomWord() : string 
@@ -25,16 +25,15 @@
 
         public function show()
         {
-            $this->title = 'Случаное слово';
+            // Возвращает готовую форму с значением
+
+            $this->title = 'Случайное слово';
             
-            $randomPOS = $this->partsOfSpeech[rand(0, 2)];
-            $randomChar = $this->charsRus[rand(0, 32)];
-
             if (!empty($_POST)) {
-                $partOfSpeech = isset($_POST['pos']) ?  $this->translatePartOfSpeech($_POST['smth']) : $randomPOS;
-                $charRus = isset($_POST['char']) ? $_POST['char'] : $randomChar;
-
-                $this->word = $this->selectRandomWord($partOfSpeech, $charRus);
+                $partOfSpeech = $this->validatePartOfSpeech();
+                $charRus = $this->validateChar();
+                
+                $this->word = $this->selectWord($partOfSpeech, $charRus);
             }
 
             return $this->render('word/show', [
@@ -55,25 +54,11 @@
             return $word;
         }
 
-
-
-        private function selectRandomWord() : string 
-        {
-            // Эт тестовая
-            $pathFile = $this->createPathFile($this->partsOfSpeech[rand(0, 2)], $this->charsRus[rand(0, 32)]);
-            $jsonArray = $this->createJsonArray($pathFile);
-            $key = $this->createRandomKey(count($jsonArray));
-
-            $word = $jsonArray[$key];
-
-            return $word;
-        }
-
         private function createPathFile($partOfSpeech, $char) : string
         {
             // Формирует путь к файлу принимая на вход значения папки и названия файла
 
-            $pathFile = '..' . DIRECTORY_SEPARATOR . 'project' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'words' . DIRECTORY_SEPARATOR . $partOfSpeech .  DIRECTORY_SEPARATOR . $char . '.json';
+            $pathFile = '.' . DIRECTORY_SEPARATOR . 'project' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'words' . DIRECTORY_SEPARATOR . $partOfSpeech .  DIRECTORY_SEPARATOR . $char . '.json';
             return $pathFile;
         }
 
@@ -97,21 +82,21 @@
             return $jsonArray;
         }    
 
-        private function translatePartOfSpeech($partOfSpeech) : string 
+        private function validatePartOfSpeech() : string
         {
-            // Потом напишу 
+            // Возвращает нужную часть речи
+
+            $partOfSpeech = $_POST['pos'] === 'random' ?  $this->partsOfSpeech[rand(0, 2)] : $_POST['pos'];
+
+            return $partOfSpeech;
+        }
+
+        private function validateChar() : string 
+        {
+            // Возвращает нужную букву
+
+            $charRus = $_POST['char'] === 'random' ? $this->charsRus[rand(0, 29)] : $_POST['char']; 
             
-            if ($partOfSpeech === 'прилагательное') {
-                return 'adject';
-            }
-            else if ($partOfSpeech === 'существительное') {
-                return 'nouns';
-            }
-            else if ($partOfSpeech === 'глагол') {
-                return 'verbs';
-            }
-            else {
-                return '';
-            }
+            return $charRus;
         }
     }

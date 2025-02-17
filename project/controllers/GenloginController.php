@@ -23,8 +23,7 @@
 
 			$this->title = 'Генератор логинов';
 			
-			if (!empty($_POST))
-			{
+			if (!empty($_POST)) {
 				$this->login = $this->createLogin($this->createCharsArray());
 			}
 
@@ -53,15 +52,13 @@
 			
 			$countSelectedChars = count($selectedChars);
 
-			if ($countSelectedChars < $this->loginLength and $countSelectedChars > 0)
-			{
+			if ($countSelectedChars < $this->loginLength and $countSelectedChars > 0) {
 				$selectedCharsPart = $this->randomCharsArray($selectedChars, $countSelectedChars);
 				$restCharsPart = $this->randomCharsArray($this->chars, ($this->loginLength - $countSelectedChars));
 
 				return array_merge($selectedCharsPart, $restCharsPart);
 			}
-			else
-			{
+			else {
 				$restCharsPart = $this->randomCharsArray($this->chars, ($this->loginLength - $countSelectedChars));
 
 				return $restCharsPart;
@@ -77,15 +74,13 @@
 		{
 			// Проверяет буквы из формы, создает из них массив или возвращает пустой
 
-			if (isset($_POST['chars']))
-			{
+			if (isset($_POST['chars'])) {
 				$pattern = '#[a-zA-Z]#';
 				preg_match_all($pattern, $_POST['chars'], $matches);
 				
 				return $matches[0];
 			}
-			else 
-			{
+			else {
 				return [];
 			}
 		}
@@ -95,12 +90,10 @@
 		{
 			// Проверяет, что получено число и возвращает его, в противном случае устанавливает значение минимальной длины логина
 
-			if(!empty($_POST['length']) and is_numeric($_POST['length']))
-			{
+			if(!empty($_POST['length']) and is_numeric($_POST['length'])) {
 				return ((int) $_POST['length']);
 			}
-			else
-			{
+			else {
 				return 6;
 			}
 		}

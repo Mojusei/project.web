@@ -61,7 +61,8 @@
                 Проекты
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="genlogin/">Генератор логинов</a></li>
+                <li><a class="dropdown-item" href="genlogin">Генератор логинов</a></li>
+                <li><a class="dropdown-item" href="word">Случайное слово</a></li>
               </ul>
             </li>
           </ul>
