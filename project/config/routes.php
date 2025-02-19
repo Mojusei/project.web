@@ -7,5 +7,7 @@
 		new Route('/genlogin', 'genlogin', 'show'), 
 
 		new Route('/word', 'word', 'show'),
+
+		new Route('/dice', 'dice', 'show'),
 	];
 	

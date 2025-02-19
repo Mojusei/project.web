@@ -1,7 +1,6 @@
 <?php
 	namespace Project\Controllers;
 	use \Core\Controller;
-	use \Project\Models\Genlogin;
 	
 	class GenloginController extends Controller
 	{

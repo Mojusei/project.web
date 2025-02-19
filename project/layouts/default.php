@@ -7,7 +7,6 @@
 
     <link rel="shortcut icon" href="/project/webroot/images/logo.ico" type="image/x-icon" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="/project/webroot/css/styles.css">
     <title><?= $title ?></title>
 </head>
 <body>
@@ -63,6 +62,7 @@
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="genlogin">Генератор логинов</a></li>
                 <li><a class="dropdown-item" href="word">Случайное слово</a></li>
+                <li><a class="dropdown-item" href="dice">Бросок кубика</a></li>
               </ul>
             </li>
           </ul>

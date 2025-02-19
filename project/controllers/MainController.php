@@ -1,7 +1,6 @@
 <?php
 	namespace Project\Controllers;
 	use \Core\Controller;
-	use \Project\Models\Main;
 	
 	class MainController extends Controller
 	{
